@@ -10,6 +10,9 @@ test_verbose:
 test_single:
 	go test -v -run Test_alpha_isPrime
 
+test_suite:
+	go test -v -run Test_alpha
+
 cover:
 	go test -cover .
 
