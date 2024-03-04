@@ -7,10 +7,10 @@ run:
 	go run ./cmd/web
 
 test:
-	go test .
+	go test ./...
 
 test_verbose:
-	go test -v .
+	go test -v ./...
 
 test_single:
 	go test -v -run Test_alpha_isPrime
