@@ -19,10 +19,10 @@ test_suite:
 	go test -v -run Test_alpha
 
 cover:
-	go test -cover .
+	go test -cover ./...
 
 coverprofile:
-	go test -coverprofile=coverage.out
+	go test -coverprofile=coverage.out ./...
 
 coverpreview: coverprofile
 	go tool cover -html=coverage.out
