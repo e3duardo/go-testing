@@ -71,7 +71,7 @@ func intro() {
 }
 
 func prompt() {
-	fmt.Println("->")
+	fmt.Print("-> ")
 }
 
 func isPrime(n int) (bool, string) {
