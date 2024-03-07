@@ -250,7 +250,7 @@ func (m *PostgresDBRepo) InsertUserImage(i data.UserImage) (int, error) {
 	var newID int
 	stmt := `
 		insert into user_images
-			(user_id, fileName, created_at, updated_at)
+			(user_id, file_name, created_at, updated_at)
 		values
 			($1, $2, $3, $4)
 		returning

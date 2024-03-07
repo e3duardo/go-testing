@@ -248,3 +248,25 @@ func TestPostgresDBRepoResetPassword(t *testing.T) {
 		t.Error("password should match 'pass', but does not")
 	}
 }
+
+func TestPostgresDBRepoInsertImage(t *testing.T) {
+	var image data.UserImage
+	image.UserID = 1
+	image.FileName = "test.png"
+	image.CreatedAt = time.Now()
+	image.UpdatedAt = time.Now()
+
+	newId, err := testRepo.InsertUserImage(image)
+	if err != nil {
+		t.Errorf("inserting user image failed: %s", err)
+	}
+	if newId != 1 {
+		t.Errorf("got wrong id for image, should 1, but got %d", newId)
+	}
+
+	image.UserID = 100
+	_, err = testRepo.InsertUserImage(image)
+	if err == nil {
+		t.Errorf("inserted a user image with non-existent user id: %s", err)
+	}
+}
