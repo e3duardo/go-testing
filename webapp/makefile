@@ -18,6 +18,9 @@ test_single:
 test_suite:
 	go test -v -run Test_alpha
 
+test_integration:
+	go test -v -tags=integration ./...
+
 cover:
 	go test -cover ./...
 
