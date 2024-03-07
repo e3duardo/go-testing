@@ -197,7 +197,7 @@ func (m *PostgresDBRepo) InsertUser(user data.User) (int, error) {
 		insert into users
 			(email, first_name, last_name, password, is_admin, created_at, updated_at)
 		values
-			($1, $2, $3, $4, $5, $7)
+			($1, $2, $3, $4, $5, $6, $7)
 		returning
 			id`
 
