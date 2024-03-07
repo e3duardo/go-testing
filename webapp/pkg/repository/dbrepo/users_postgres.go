@@ -171,7 +171,7 @@ func (m *PostgresDBRepo) DeleteUser(id int) error {
 		delete from
 			users
 		where
-			id = $6`
+			id = $1`
 
 	_, err := m.DB.ExecContext(ctx, stmt, id)
 
