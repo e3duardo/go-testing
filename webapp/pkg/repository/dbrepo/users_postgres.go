@@ -219,16 +219,15 @@ func (m *PostgresDBRepo) InsertUser(user data.User) (int, error) {
 }
 
 // ResetPassword is the method we will use to change a user's password
-func (m *PostgresDBRepo) ResetPassword(id int, password string) (int, error) {
+func (m *PostgresDBRepo) ResetPassword(id int, password string) error {
 	ctx, cancel := context.WithTimeout(context.Background(), dbTimeout)
 	defer cancel()
 
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), 12)
 	if err != nil {
-		return 0, err
+		return err
 	}
 
-	var newID int
 	stmt := `
 		update users set
 			password = $1
@@ -237,10 +236,10 @@ func (m *PostgresDBRepo) ResetPassword(id int, password string) (int, error) {
 
 	_, err = m.DB.ExecContext(ctx, stmt, hashedPassword, id)
 	if err != nil {
-		return 0, err
+		return err
 	}
 
-	return newID, nil
+	return nil
 }
 
 // InsertUserImage inserts a user profile image into the database
