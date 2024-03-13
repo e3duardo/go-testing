@@ -1,4 +1,6 @@
 coverage.out
+.DS_Store
+
 .vscode/
 postgres-data/
 static/img/*
