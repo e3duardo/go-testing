@@ -3,8 +3,13 @@
 # install-deps
 # 	go get github.com/go-chi/chi/v5
 
-run:
+run_web:
 	go run ./cmd/web
+
+run_api:
+	go run ./cmd/api
+
+run: run_api
 
 test:
 	go test ./...
