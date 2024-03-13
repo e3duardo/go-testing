@@ -253,8 +253,14 @@ func (m *PostgresDBRepo) InsertUserImage(i data.UserImage) (int, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), dbTimeout)
 	defer cancel()
 
+	stmt := `delete from user_images where user_id = $1`
+	_, err := m.DB.ExecContext(ctx, stmt, i.UserID)
+	if err != nil {
+		return 0, err
+	}
+
 	var newID int
-	stmt := `
+	stmt = `
 		insert into user_images
 			(user_id, file_name, created_at, updated_at)
 		values
@@ -262,7 +268,7 @@ func (m *PostgresDBRepo) InsertUserImage(i data.UserImage) (int, error) {
 		returning
 			id`
 
-	err := m.DB.QueryRowContext(ctx, stmt,
+	err = m.DB.QueryRowContext(ctx, stmt,
 		i.UserID,
 		i.FileName,
 		time.Now(),
