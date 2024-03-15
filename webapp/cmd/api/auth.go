@@ -39,7 +39,7 @@ func (app *application) getTokenFromHeaderAndVerify(w http.ResponseWriter, r *ht
 	}
 
 	// split the header on spaces
-	headerParts := strings.Split(authHeader, "")
+	headerParts := strings.Split(authHeader, " ")
 	if len(headerParts) != 2 {
 		return "", nil, errors.New("no auth header")
 	}
