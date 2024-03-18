@@ -185,6 +185,19 @@
         refreshTokenDisplay.innerHTML = "No refresh token!";
       }
     }
+
+    logoutBtn.addEventListener("click", () => {
+      access_token = "";
+      refresh_token = "";
+
+      fetch("/web/logout", { method: "GET" })
+        .then(res => {
+          setUI(false);
+        })
+        .catch(error => {
+          userOutput.innerHTML = error
+        })
+    })
   </script>
 </body>
 
